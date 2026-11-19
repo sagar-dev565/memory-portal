@@ -5,4 +5,5 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   site: "https://memoryportal.example",
   output: "static",
+  vite: { build: { chunkSizeWarningLimit: 800 } },
 });

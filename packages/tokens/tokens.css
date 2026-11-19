@@ -69,4 +69,14 @@
   /* Layout */
   --mp-container: 1200px;
   --mp-touch-target: 44px;
+
+  /* Studio / cinematic theme (public website) */
+  --mp-night: #0e0c0a;
+  --mp-night-2: #15120f;
+  --mp-night-3: #1d1915;
+  --mp-night-line: rgba(247, 241, 230, 0.1);
+  --mp-night-text: #f3ece0;
+  --mp-night-muted: #a69b8b;
+  --mp-gold-glow: #d4b07a;
+  --mp-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }

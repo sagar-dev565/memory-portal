@@ -21,16 +21,78 @@ const {
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta name="theme-color" content="#f7f1e6" />
+    <meta name="theme-color" content="#0e0c0a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&display=swap"
     />
   </head>
-  <body>
+  <body class="is-loading">
+    <!-- Preloader -->
+    <div class="preloader" data-preloader aria-hidden="true">
+      <div class="preloader__inner">
+        <p class="preloader__word">Memory Portal</p>
+        <p class="preloader__count"><span data-preloader-count>0</span>%</p>
+      </div>
+      <div class="preloader__bar"><span data-preloader-bar></span></div>
+    </div>
+
+    <div class="cursor" data-cursor aria-hidden="true">
+      <span class="cursor__ring" data-cursor-ring></span>
+      <span class="cursor__dot" data-cursor-dot></span>
+    </div>
+    <div class="grain" aria-hidden="true"></div>
+
     <slot />
   </body>
 </html>
+
+<style is:global>
+  .preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: var(--mp-night);
+    color: var(--mp-night-text);
+  }
+  .preloader__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+  .preloader__word {
+    font-family: var(--mp-font-serif);
+    font-style: italic;
+    font-size: clamp(2rem, 6vw, 5rem);
+    line-height: 1;
+  }
+  .preloader__count {
+    font-family: var(--mp-font-serif);
+    font-size: clamp(3rem, 10vw, 9rem);
+    line-height: 0.85;
+    color: var(--mp-gold-glow);
+    font-variant-numeric: tabular-nums;
+  }
+  .preloader__bar {
+    margin-top: 1.5rem;
+    height: 1px;
+    background: var(--mp-night-line);
+  }
+  .preloader__bar span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--mp-gold-glow);
+  }
+  html.no-motion .preloader {
+    display: none;
+  }
+</style>
