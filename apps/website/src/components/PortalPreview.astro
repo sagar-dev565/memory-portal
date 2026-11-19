@@ -1,0 +1,209 @@
+---
+import Icon from "./Icon.astro";
+import { timeline } from "../data/site";
+---
+
+<section class="section section--dark" id="portal">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Your Memory Portal</span>
+      <h2>Not cloud storage. Your family's story, in order.</h2>
+      <p>
+        Every memory finds its place on your Family Timeline — weddings, first steps, trips and
+        graduations — with the people in them. Find a 20-year-old wedding video in seconds.
+      </p>
+    </div>
+
+    <div class="frame">
+      <div class="frame__bar" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="frame__body">
+        <aside class="frame__side" aria-hidden="true">
+          <b>The Sharma Family</b>
+          <span class="is-active">Timeline</span>
+          <span>Events</span>
+          <span>Photos</span>
+          <span>Videos</span>
+          <span>People</span>
+          <span>Family Members</span>
+        </aside>
+        <div class="frame__main">
+          <div class="frame__welcome">
+            <p class="frame__hello">Our family story lives here.</p>
+            <p class="frame__sub">On this day, 1998 — Dad &amp; Mom's wedding reception</p>
+          </div>
+          <ol class="tl">
+            {timeline.map((t) => (
+              <li class="tl__item">
+                <span class="tl__year">{t.year}</span>
+                <div class="tl__card">
+                  <span class:list={["photo", `tone-${t.tone}`]}></span>
+                  <div>
+                    <b>{t.title}</b>
+                    <small>{t.meta}</small>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <ul class="features">
+      <li><Icon name="play" size={20} /><div><b>Long videos, made easy</b><span>Chapters, resume playback and speed control — even for 8-hour tapes.</span></div></li>
+      <li><Icon name="users" size={20} /><div><b>Share with family</b><span>Invite family and choose who can view, upload, download or share.</span></div></li>
+      <li><Icon name="heart" size={20} /><div><b>People &amp; events</b><span>Browse by Grandpa, Mom, birthdays or trips — not file names.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .frame {
+    background: var(--mp-warm-white);
+    color: var(--mp-charcoal);
+    border-radius: var(--mp-radius-xl);
+    overflow: hidden;
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.6);
+  }
+  .frame__bar {
+    display: flex;
+    gap: 6px;
+    padding: 12px 16px;
+    background: var(--mp-ivory-deep);
+  }
+  .frame__bar span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--mp-beige);
+  }
+  .frame__body {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    min-height: 380px;
+  }
+  .frame__side {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--mp-space-5) var(--mp-space-4);
+    border-right: 1px solid var(--mp-line);
+    background: var(--mp-ivory);
+    font-size: var(--mp-text-sm);
+    color: var(--mp-charcoal-soft);
+  }
+  .frame__side b {
+    font-family: var(--mp-font-serif);
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--mp-charcoal);
+    margin-bottom: var(--mp-space-3);
+  }
+  .frame__side span {
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+  .frame__side .is-active {
+    background: var(--mp-warm-white);
+    color: var(--mp-charcoal);
+    font-weight: 600;
+    box-shadow: var(--mp-shadow-sm);
+  }
+  .frame__main {
+    padding: var(--mp-space-6);
+  }
+  .frame__hello {
+    font-family: var(--mp-font-serif);
+    font-size: var(--mp-text-2xl);
+  }
+  .frame__sub {
+    margin-top: 4px;
+    color: var(--mp-muted);
+    font-size: var(--mp-text-sm);
+  }
+  .tl {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--mp-space-3);
+    list-style: none;
+    margin: var(--mp-space-6) 0 0;
+    padding: var(--mp-space-5) 0 0;
+    border-top: 2px solid var(--mp-beige);
+  }
+  .tl__year {
+    display: block;
+    font-family: var(--mp-font-serif);
+    font-size: 1.4rem;
+    color: var(--mp-gold-deep);
+    margin-bottom: var(--mp-space-2);
+  }
+  .tl__card {
+    background: var(--mp-warm-white);
+    border: 1px solid var(--mp-line);
+    border-radius: var(--mp-radius-md);
+    overflow: hidden;
+  }
+  .tl__card .photo {
+    display: block;
+    aspect-ratio: 4 / 3;
+  }
+  .tl__card div {
+    padding: 10px 12px;
+  }
+  .tl__card b {
+    display: block;
+    font-size: var(--mp-text-sm);
+  }
+  .tl__card small {
+    color: var(--mp-muted);
+    font-size: 0.75rem;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mp-space-5);
+    list-style: none;
+    margin: var(--mp-space-7) 0 0;
+    padding: 0;
+  }
+  .features li {
+    display: flex;
+    gap: var(--mp-space-3);
+  }
+  .features :global(svg) {
+    color: var(--mp-gold-soft);
+    flex: none;
+    margin-top: 3px;
+  }
+  .features b {
+    display: block;
+    color: var(--mp-warm-white);
+  }
+  .features span {
+    color: #cfc5b6;
+    font-size: var(--mp-text-sm);
+  }
+
+  @media (max-width: 960px) {
+    .frame__body {
+      grid-template-columns: 1fr;
+    }
+    .frame__side {
+      display: none;
+    }
+    .tl {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    .features {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .frame__main {
+      padding: var(--mp-space-4);
+    }
+    .tl {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

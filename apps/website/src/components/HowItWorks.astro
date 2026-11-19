@@ -1,0 +1,110 @@
+---
+import { steps } from "../data/site";
+---
+
+<section class="section" id="how-it-works">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">How it works</span>
+      <h2>From a box of tapes to a family portal in four steps</h2>
+      <p>We handle everything. You simply send your memories and open your portal when it's ready.</p>
+    </div>
+
+    <ol class="steps">
+      {steps.map((s) => (
+        <li class="step">
+          <span class="step__num">{s.number}</span>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="tracker" aria-label="Example order progress">
+      <p class="tracker__title">Track every step of your order</p>
+      <div class="tracker__steps">
+        {["Received", "Digitizing", "Quality check", "Uploading", "Portal ready", "Delivered"].map((label, i) => (
+          <span class:list={["tracker__step", i < 3 && "is-done", i === 3 && "is-current"]}>{label}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--mp-space-5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: step;
+  }
+  .step {
+    position: relative;
+    padding-top: var(--mp-space-5);
+    border-top: 2px solid var(--mp-beige);
+  }
+  .step__num {
+    font-family: var(--mp-font-serif);
+    font-size: 2.25rem;
+    color: var(--mp-gold);
+    line-height: 1;
+  }
+  .step h3 {
+    margin-top: var(--mp-space-3);
+    font-size: 1.35rem;
+  }
+  .step p {
+    margin-top: var(--mp-space-2);
+    color: var(--mp-muted);
+    font-size: var(--mp-text-sm);
+  }
+  .tracker {
+    margin-top: var(--mp-space-8);
+    padding: var(--mp-space-5) var(--mp-space-6);
+    background: var(--mp-ivory);
+    border-radius: var(--mp-radius-lg);
+  }
+  .tracker__title {
+    font-weight: 600;
+    margin-bottom: var(--mp-space-4);
+  }
+  .tracker__steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--mp-space-2);
+  }
+  .tracker__step {
+    padding: 8px 14px;
+    border-radius: var(--mp-radius-pill);
+    font-size: var(--mp-text-xs);
+    font-weight: 600;
+    background: var(--mp-warm-white);
+    color: var(--mp-muted);
+    border: 1px solid var(--mp-line);
+  }
+  .tracker__step.is-done {
+    background: var(--mp-gold-soft);
+    color: var(--mp-gold-deep);
+    border-color: transparent;
+  }
+  .tracker__step.is-current {
+    background: var(--mp-charcoal);
+    color: var(--mp-ivory);
+    border-color: transparent;
+  }
+
+  @media (max-width: 960px) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: var(--mp-space-6);
+    }
+  }
+  @media (max-width: 520px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,166 @@
+---
+import Icon from "./Icon.astro";
+import { conversionServices, deliveryServices, type Service } from "../data/site";
+
+const groups: { id: string; step: string; title: string; text: string; items: Service[] }[] = [
+  {
+    id: "convert",
+    step: "What we preserve",
+    title: "Bring us any format",
+    text: "Old tapes, discs, prints, reels and cassettes — we digitize them by hand, at full quality.",
+    items: conversionServices,
+  },
+  {
+    id: "receive",
+    step: "What you receive",
+    title: "Your family story, beautifully kept",
+    text: "Not a folder of files. A private portal, a key to open it, and keepsakes to hold.",
+    items: deliveryServices,
+  },
+];
+---
+
+<section class="section section--ivory" id="services">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Our services</span>
+      <h2>Everything your family needs to preserve its story</h2>
+      <p>Two simple parts: we convert your old media, then we give it back as something your family will treasure.</p>
+    </div>
+
+    {groups.map((group, gi) => (
+      <div class="group" id={group.id}>
+        <div class="group__head">
+          <span class="group__step">{String(gi + 1).padStart(2, "0")}</span>
+          <div>
+            <p class="group__kicker">{group.step}</p>
+            <h3>{group.title}</h3>
+            <p class="group__text">{group.text}</p>
+          </div>
+        </div>
+
+        <div class:list={["cards", group.items.length === 3 && "cards--three"]}>
+          {group.items.map((s) => (
+            <article class="card">
+              <div class="card__top">
+                <span class="card__icon"><Icon name={s.icon} size={26} /></span>
+                {s.tag && <span class="card__tag">{s.tag}</span>}
+              </div>
+              <h4>{s.title}</h4>
+              <p class="card__summary">{s.summary}</p>
+              <ul>
+                {s.includes.map((i) => (
+                  <li><Icon name="check" size={16} />{i}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .group + .group {
+    margin-top: var(--mp-space-8);
+  }
+  .group__head {
+    display: flex;
+    gap: var(--mp-space-5);
+    align-items: flex-start;
+    margin-bottom: var(--mp-space-6);
+    max-width: 720px;
+  }
+  .group__step {
+    font-family: var(--mp-font-serif);
+    font-size: 2.75rem;
+    line-height: 1;
+    color: var(--mp-gold);
+  }
+  .group__kicker {
+    font-size: var(--mp-text-xs);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mp-gold-deep);
+  }
+  .group h3 {
+    font-size: var(--mp-text-2xl);
+    margin-top: var(--mp-space-1);
+  }
+  .group__text {
+    margin-top: var(--mp-space-2);
+    color: var(--mp-muted);
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: var(--mp-space-4);
+  }
+  .cards--three {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--mp-space-5);
+    background: var(--mp-warm-white);
+    border: 1px solid var(--mp-line);
+    border-radius: var(--mp-radius-lg);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover {
+    box-shadow: var(--mp-shadow-md);
+    transform: translateY(-2px);
+  }
+  .card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .card__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--mp-beige-soft);
+    color: var(--mp-gold-deep);
+  }
+  .card__tag {
+    padding: 4px 10px;
+    border-radius: var(--mp-radius-pill);
+    background: var(--mp-charcoal);
+    color: var(--mp-ivory);
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .card h4 {
+    margin-top: var(--mp-space-4);
+    font-size: 1.3rem;
+  }
+  .card__summary {
+    margin-top: var(--mp-space-2);
+    font-size: var(--mp-text-sm);
+    color: var(--mp-charcoal-soft);
+  }
+  .card ul {
+    margin: auto 0 0;
+    padding: var(--mp-space-4) 0 0;
+    list-style: none;
+    display: grid;
+    gap: 6px;
+    font-size: var(--mp-text-xs);
+    color: var(--mp-charcoal-soft);
+  }
+  .card li {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .card li :global(svg) {
+    color: var(--mp-gold);
+    flex: none;
+  }
+</style>

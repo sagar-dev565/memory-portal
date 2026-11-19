@@ -1,0 +1,181 @@
+---
+// The physical-media problem + before/after.
+---
+
+<section class="section problem">
+  <div class="container problem__grid">
+    <div>
+      <span class="eyebrow">Why now</span>
+      <h2>Tapes fade. Discs fail. Photos curl in the heat.</h2>
+      <p class="problem__text">
+        Most families have decades of memories sitting in boxes — on formats that are slowly
+        breaking down and players nobody owns anymore. Every year they wait, a little more is lost.
+      </p>
+      <dl class="stats">
+        <div><dt>10–25 yrs</dt><dd>typical life of a VHS tape before quality drops</dd></div>
+        <div><dt>No player</dt><dd>most homes can't play tapes or reels anymore</dd></div>
+        <div><dt>1 copy</dt><dd>most family memories exist in a single fragile copy</dd></div>
+      </dl>
+    </div>
+
+    <div class="compare" aria-label="Before and after Memory Portal">
+      <div class="compare__side compare__side--before">
+        <p class="compare__label">Before</p>
+        <div class="box">
+          <span class="box__item box__item--tape">VHS · 1998</span>
+          <span class="box__item box__item--disc">Wedding DVD</span>
+          <span class="box__item box__item--photo">Loose photos</span>
+          <span class="box__item box__item--tape2">Hi8 · Trip</span>
+        </div>
+        <p class="compare__caption">A box in the attic. Unlabelled. Unwatched.</p>
+      </div>
+      <div class="compare__arrow" aria-hidden="true">→</div>
+      <div class="compare__side compare__side--after">
+        <p class="compare__label">After</p>
+        <div class="mini-portal">
+          <div class="mini-portal__row"><span class="photo tone-a"></span><div><b>1998 · Wedding</b><small>Video · 2h 14m</small></div></div>
+          <div class="mini-portal__row"><span class="photo tone-c"></span><div><b>2003 · Family Trip</b><small>48 photos · 1 video</small></div></div>
+          <div class="mini-portal__row"><span class="photo tone-d"></span><div><b>2007 · Birthdays</b><small>112 photos</small></div></div>
+        </div>
+        <p class="compare__caption">A family timeline. Searchable. Shared with everyone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .problem__grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: var(--mp-space-8);
+    align-items: center;
+  }
+  h2 {
+    font-size: var(--mp-text-3xl);
+    margin-top: var(--mp-space-3);
+  }
+  .problem__text {
+    margin-top: var(--mp-space-4);
+    font-size: var(--mp-text-lg);
+    color: var(--mp-muted);
+  }
+  .stats {
+    display: grid;
+    gap: var(--mp-space-4);
+    margin: var(--mp-space-6) 0 0;
+  }
+  .stats div {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--mp-space-4);
+    align-items: baseline;
+    padding-top: var(--mp-space-4);
+    border-top: 1px solid var(--mp-line);
+  }
+  .stats dt {
+    font-family: var(--mp-font-serif);
+    font-size: 1.5rem;
+    color: var(--mp-gold-deep);
+  }
+  .stats dd {
+    margin: 0;
+    color: var(--mp-charcoal-soft);
+  }
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--mp-space-4);
+    align-items: center;
+  }
+  .compare__side {
+    padding: var(--mp-space-5);
+    border-radius: var(--mp-radius-lg);
+  }
+  .compare__side--before {
+    background: #e7dfd3;
+    filter: saturate(0.6);
+  }
+  .compare__side--after {
+    background: var(--mp-warm-white);
+    border: 1px solid var(--mp-line);
+    box-shadow: var(--mp-shadow-md);
+  }
+  .compare__label {
+    font-size: var(--mp-text-xs);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mp-muted);
+    margin-bottom: var(--mp-space-3);
+  }
+  .compare__side--after .compare__label {
+    color: var(--mp-gold-deep);
+  }
+  .compare__arrow {
+    font-size: 1.75rem;
+    color: var(--mp-gold);
+  }
+  .compare__caption {
+    margin-top: var(--mp-space-4);
+    font-size: var(--mp-text-sm);
+    color: var(--mp-charcoal-soft);
+  }
+  .box {
+    position: relative;
+    height: 190px;
+    background: #c9b597;
+    border-radius: 6px;
+    box-shadow: inset 0 -30px 0 rgba(0, 0, 0, 0.06);
+  }
+  .box__item {
+    position: absolute;
+    padding: 8px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    color: #f2ebdf;
+    background: #3b3530;
+  }
+  .box__item--tape { top: 22px; left: 14px; transform: rotate(-8deg); }
+  .box__item--disc { top: 70px; right: 14px; transform: rotate(6deg); background: #8a8178; }
+  .box__item--photo { bottom: 26px; left: 30px; transform: rotate(4deg); background: #efe6d6; color: #4a443d; }
+  .box__item--tape2 { bottom: 60px; right: 40px; transform: rotate(-3deg); }
+  .mini-portal {
+    display: grid;
+    gap: var(--mp-space-3);
+  }
+  .mini-portal__row {
+    display: flex;
+    gap: var(--mp-space-3);
+    align-items: center;
+  }
+  .mini-portal__row .photo {
+    width: 52px;
+    height: 52px;
+    flex: none;
+    border-radius: 8px;
+  }
+  .mini-portal__row b {
+    display: block;
+    font-family: var(--mp-font-serif);
+    font-weight: 500;
+  }
+  .mini-portal__row small {
+    color: var(--mp-muted);
+  }
+
+  @media (max-width: 960px) {
+    .problem__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 600px) {
+    .compare {
+      grid-template-columns: 1fr;
+    }
+    .compare__arrow {
+      transform: rotate(90deg);
+      justify-self: center;
+    }
+  }
+</style>
