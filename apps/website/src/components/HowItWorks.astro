@@ -2,109 +2,160 @@
 import { steps } from "../data/site";
 ---
 
-<section class="section" id="how-it-works">
-  <div class="container">
-    <div class="section-head section-head--center">
-      <span class="eyebrow">How it works</span>
-      <h2>From a box of tapes to a family portal in four steps</h2>
-      <p>We handle everything. You simply send your memories and open your portal when it's ready.</p>
+<section class="section how" id="how-it-works" data-how>
+  <div class="container how__grid">
+    <div class="how__intro">
+      <p class="eyebrow">How it works</p>
+      <h2 class="title" data-split>From a box of tapes to a <em>family portal.</em></h2>
+      <p class="lead">We handle everything. You send your memories and open your portal when it's ready.</p>
+
+      <div class="tracker">
+        <p class="tracker__label">Track every step of your order</p>
+        <div class="tracker__steps" data-tracker>
+          {["Received", "Digitizing", "Quality check", "Uploading", "Portal ready", "Delivered"].map((label) => (
+            <span class="tracker__step">{label}</span>
+          ))}
+        </div>
+      </div>
     </div>
 
-    <ol class="steps">
+    <ol class="how__steps" data-how-steps>
+      <svg class="how__line" viewBox="0 0 4 100" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="2" y1="0" x2="2" y2="100" class="how__line-bg" />
+        <line x1="2" y1="0" x2="2" y2="100" class="how__line-fg" data-how-line />
+      </svg>
       {steps.map((s) => (
-        <li class="step">
-          <span class="step__num">{s.number}</span>
-          <h3>{s.title}</h3>
-          <p>{s.text}</p>
+        <li class="how__step" data-how-step>
+          <span class="how__num">{s.number}</span>
+          <div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
         </li>
       ))}
     </ol>
-
-    <div class="tracker" aria-label="Example order progress">
-      <p class="tracker__title">Track every step of your order</p>
-      <div class="tracker__steps">
-        {["Received", "Digitizing", "Quality check", "Uploading", "Portal ready", "Delivered"].map((label, i) => (
-          <span class:list={["tracker__step", i < 3 && "is-done", i === 3 && "is-current"]}>{label}</span>
-        ))}
-      </div>
-    </div>
   </div>
 </section>
 
 <style>
-  .steps {
+  .how {
+    background: var(--mp-night);
+  }
+  .how__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--mp-space-5);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    counter-reset: step;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 5rem;
+    align-items: start;
   }
-  .step {
-    position: relative;
-    padding-top: var(--mp-space-5);
-    border-top: 2px solid var(--mp-beige);
+  .how__intro {
+    position: sticky;
+    top: 8rem;
   }
-  .step__num {
-    font-family: var(--mp-font-serif);
-    font-size: 2.25rem;
-    color: var(--mp-gold);
-    line-height: 1;
-  }
-  .step h3 {
-    margin-top: var(--mp-space-3);
-    font-size: 1.35rem;
-  }
-  .step p {
-    margin-top: var(--mp-space-2);
-    color: var(--mp-muted);
-    font-size: var(--mp-text-sm);
+  .how__intro h2 {
+    margin: 1rem 0 1.5rem;
   }
   .tracker {
-    margin-top: var(--mp-space-8);
-    padding: var(--mp-space-5) var(--mp-space-6);
-    background: var(--mp-ivory);
-    border-radius: var(--mp-radius-lg);
+    margin-top: 3rem;
+    padding: 1.4rem;
+    border: 1px solid var(--mp-night-line);
+    border-radius: 20px;
+    background: var(--mp-night-2);
   }
-  .tracker__title {
-    font-weight: 600;
-    margin-bottom: var(--mp-space-4);
+  .tracker__label {
+    font-size: 0.8rem;
+    color: var(--mp-night-muted);
+    margin-bottom: 1rem;
   }
   .tracker__steps {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--mp-space-2);
+    gap: 0.5rem;
   }
   .tracker__step {
-    padding: 8px 14px;
-    border-radius: var(--mp-radius-pill);
-    font-size: var(--mp-text-xs);
-    font-weight: 600;
-    background: var(--mp-warm-white);
-    color: var(--mp-muted);
-    border: 1px solid var(--mp-line);
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    border: 1px solid var(--mp-night-line);
+    color: var(--mp-night-muted);
+    transition: background 0.4s, color 0.4s, border-color 0.4s;
   }
   .tracker__step.is-done {
-    background: var(--mp-gold-soft);
-    color: var(--mp-gold-deep);
+    background: rgba(212, 176, 122, 0.15);
     border-color: transparent;
+    color: var(--mp-gold-glow);
   }
   .tracker__step.is-current {
-    background: var(--mp-charcoal);
-    color: var(--mp-ivory);
+    background: var(--mp-gold-glow);
+    color: var(--mp-night);
     border-color: transparent;
   }
-
-  @media (max-width: 960px) {
-    .steps {
-      grid-template-columns: repeat(2, 1fr);
-      row-gap: var(--mp-space-6);
-    }
+  .how__steps {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 4.5rem;
+    list-style: none;
+    display: grid;
+    gap: 5rem;
   }
-  @media (max-width: 520px) {
-    .steps {
+  .how__line {
+    position: absolute;
+    left: 1.25rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 4px;
+    height: calc(100% - 1rem);
+    overflow: visible;
+  }
+  .how__line line {
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+  .how__line-bg {
+    stroke: var(--mp-night-line);
+  }
+  .how__line-fg {
+    stroke: var(--mp-gold-glow);
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+  }
+  .how__step {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+  }
+  .how__num {
+    position: absolute;
+    left: -4.5rem;
+    top: 0;
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    background: var(--mp-night);
+    border: 1px solid var(--mp-gold-glow);
+    font-size: 0.8rem;
+    color: var(--mp-gold-glow);
+  }
+  .how__step h3 {
+    font-size: clamp(1.8rem, 1.2rem + 1.8vw, 3rem);
+  }
+  .how__step p {
+    margin-top: 0.8rem;
+    font-size: 1.05rem;
+    color: var(--mp-night-muted);
+    max-width: 440px;
+  }
+  @media (max-width: 900px) {
+    .how__grid {
       grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+    .how__intro {
+      position: static;
+    }
+    .how__steps {
+      gap: 3.5rem;
     }
   }
 </style>

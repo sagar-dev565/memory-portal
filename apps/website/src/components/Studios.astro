@@ -1,119 +1,157 @@
 ---
 import { studioBenefits } from "../data/site";
+const flow = ["Create client", "Upload photos & videos", "Preview as client", "Publish portal", "Deliver by WhatsApp, SMS or email"];
 ---
 
-<section class="section section--ivory" id="studios">
-  <div class="container studios">
-    <div class="studios__copy">
-      <span class="eyebrow">For studios &amp; photographers</span>
-      <h2>Give every client a memory they can keep forever.</h2>
-      <p class="studios__lead">
-        Wedding photographers, videographers, event studios and digitization partners use Memory
-        Portal to deliver projects in a beautiful private portal — and earn on every delivery.
-      </p>
-      <div class="studios__ctas">
-        <a href="#studio-signup" class="btn btn--primary">Create Studio Account</a>
-        <a href="#studio-demo" class="btn btn--secondary">See Studio Demo</a>
+<section class="section studios" id="studios">
+  <div class="container">
+    <div class="studios__head">
+      <p class="eyebrow">For studios &amp; photographers</p>
+      <h2 class="display studios__title" data-split>Give every client a memory they can <em>keep forever.</em></h2>
+      <div class="studios__row">
+        <p class="lead">
+          Wedding photographers, videographers, event studios and digitization partners deliver
+          projects in a beautiful private portal — and earn on every delivery.
+        </p>
+        <div class="studios__ctas">
+          <a href="#studio-signup" class="btn btn--gold" data-hover data-magnetic>Create Studio Account <span class="btn__arrow">→</span></a>
+          <a href="#studio-demo" class="btn btn--ghost" data-hover data-magnetic>See Studio Demo</a>
+        </div>
       </div>
     </div>
 
-    <div class="studios__benefits">
-      {studioBenefits.map((b) => (
-        <div class="benefit">
+    <div class="benefits">
+      {studioBenefits.map((b, i) => (
+        <article class="benefit" data-reveal data-hover>
+          <span class="benefit__num">{String(i + 1).padStart(2, "0")}</span>
           <h3>{b.title}</h3>
           <p>{b.text}</p>
-        </div>
+        </article>
       ))}
     </div>
 
-    <div class="flow" aria-label="Studio workflow">
-      {["Create client", "Upload photos & videos", "Preview as client", "Publish portal", "Deliver by WhatsApp, SMS or email"].map((s, i) => (
-        <div class="flow__step"><span>{i + 1}</span>{s}</div>
+    <ol class="flow" data-flow>
+      {flow.map((s, i) => (
+        <li class="flow__step" data-flow-step>
+          <span>{i + 1}</span>
+          <p>{s}</p>
+        </li>
       ))}
-    </div>
+    </ol>
   </div>
 </section>
 
 <style>
   .studios {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: var(--mp-space-7) var(--mp-space-8);
-    align-items: start;
+    background: var(--mp-night);
   }
-  .studios h2 {
-    font-size: var(--mp-text-3xl);
-    margin-top: var(--mp-space-3);
+  .studios__title {
+    margin-top: 1rem;
+    max-width: 16ch;
   }
-  .studios__lead {
-    margin-top: var(--mp-space-4);
-    font-size: var(--mp-text-lg);
-    color: var(--mp-muted);
+  .studios__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
   }
   .studios__ctas {
     display: flex;
+    gap: 0.8rem;
     flex-wrap: wrap;
-    gap: var(--mp-space-3);
-    margin-top: var(--mp-space-6);
   }
-  .studios__benefits {
+  .benefits {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--mp-space-4);
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 5rem;
+    border-top: 1px solid var(--mp-night-line);
   }
   .benefit {
-    padding: var(--mp-space-5);
-    background: var(--mp-warm-white);
-    border-radius: var(--mp-radius-lg);
-    border: 1px solid var(--mp-line);
+    padding: 2rem 1.6rem 2rem 0;
+    border-right: 1px solid var(--mp-night-line);
+    transition: background 0.5s;
+  }
+  .benefit + .benefit {
+    padding-left: 1.6rem;
+  }
+  .benefit:last-child {
+    border-right: 0;
+  }
+  .benefit__num {
+    font-size: 0.75rem;
+    color: var(--mp-gold-glow);
   }
   .benefit h3 {
-    font-size: 1.2rem;
+    margin-top: 2.5rem;
+    font-size: 1.55rem;
+    line-height: 1.15;
   }
   .benefit p {
-    margin-top: var(--mp-space-2);
-    font-size: var(--mp-text-sm);
-    color: var(--mp-muted);
+    margin-top: 0.8rem;
+    font-size: 0.92rem;
+    color: var(--mp-night-muted);
   }
   .flow {
-    grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: var(--mp-space-3);
+    gap: 0.8rem;
+    margin: 4rem 0 0;
+    padding: 0;
+    list-style: none;
   }
   .flow__step {
     display: flex;
     align-items: center;
-    gap: var(--mp-space-3);
-    padding: var(--mp-space-4);
-    background: var(--mp-charcoal);
-    color: var(--mp-ivory);
-    border-radius: var(--mp-radius-md);
-    font-size: var(--mp-text-sm);
-    font-weight: 500;
+    gap: 0.9rem;
+    padding: 1.1rem;
+    border-radius: 16px;
+    background: var(--mp-night-3);
+    border: 1px solid var(--mp-night-line);
+    font-size: 0.9rem;
   }
   .flow__step span {
     display: grid;
     place-items: center;
-    width: 30px;
-    height: 30px;
     flex: none;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: var(--mp-gold);
+    background: var(--mp-gold-glow);
+    color: var(--mp-night);
     font-weight: 600;
+    font-size: 0.85rem;
   }
-
-  @media (max-width: 960px) {
-    .studios {
-      grid-template-columns: 1fr;
+  @media (max-width: 1000px) {
+    .benefits {
+      grid-template-columns: 1fr 1fr;
+    }
+    .benefit:nth-child(2) {
+      border-right: 0;
+    }
+    .benefit:nth-child(3) {
+      padding-left: 0;
+    }
+    .benefit:nth-child(n + 3) {
+      border-top: 1px solid var(--mp-night-line);
     }
     .flow {
       grid-template-columns: 1fr;
     }
   }
   @media (max-width: 560px) {
-    .studios__benefits {
+    .benefits {
       grid-template-columns: 1fr;
+    }
+    .benefit,
+    .benefit + .benefit {
+      padding: 1.6rem 0;
+      border-right: 0;
+      border-top: 1px solid var(--mp-night-line);
+    }
+    .benefit:first-child {
+      border-top: 0;
     }
   }
 </style>

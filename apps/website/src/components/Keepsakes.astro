@@ -2,229 +2,208 @@
 import Icon from "./Icon.astro";
 ---
 
-<section class="section" id="keepsakes">
-  <div class="container ks">
-    <div class="ks__visual" aria-hidden="true">
-      <div class="key-card">
-        <div class="key-card__chip"><Icon name="key" size={22} /></div>
-        <p class="key-card__family">The Sharma Family</p>
-        <p class="key-card__since">Our story since 1985</p>
-        <div class="key-card__qr">
-          {Array.from({ length: 25 }).map((_, i) => (
-            <span class:list={[(i * 7) % 3 === 0 && "on"]}></span>
-          ))}
+<section class="section ks" id="keepsakes" data-keepsakes>
+  <div class="container ks__grid">
+    <div class="ks__stage" aria-hidden="true" data-ks-stage>
+      <div class="ks__orbit"></div>
+      <div class="key" data-key>
+        <div class="key__face key__front">
+          <div class="key__chip"><Icon name="key" size={22} /></div>
+          <p class="key__family">The Sharma Family</p>
+          <p class="key__since">Our story since 1985</p>
+          <div class="key__qr">
+            {Array.from({ length: 49 }).map((_, i) => (
+              <span class:list={[((i * 13) % 5 < 2 || i % 8 === 0) && "on"]}></span>
+            ))}
+          </div>
+          <p class="key__hint">Tap or scan to open</p>
+          <span class="key__shine" data-key-shine></span>
         </div>
-        <p class="key-card__hint">Tap or scan to open</p>
-      </div>
-      <div class="figure">
-        <div class="figure__base"></div>
-        <div class="figure__pair">
-          <span class="figure__p figure__p--1"></span>
-          <span class="figure__p figure__p--2"></span>
+        <div class="key__face key__back">
+          <svg viewBox="0 0 64 64" width="64" height="64">
+            <path d="M18 48V26a14 14 0 0 1 28 0v22" fill="none" stroke="#d4b07a" stroke-width="3" stroke-linecap="round" />
+            <circle cx="32" cy="36" r="4" fill="#d4b07a" />
+          </svg>
+          <p>Memory Portal</p>
         </div>
-        <p>“Anil &amp; Meera · 12.12.1998”</p>
       </div>
     </div>
 
     <div class="ks__copy">
-      <span class="eyebrow">Memory Key &amp; Keepsakes</span>
-      <h2>Memories you can hold in your hand</h2>
-      <p class="ks__lead">
+      <p class="eyebrow">Memory Key &amp; Keepsakes</p>
+      <h2 class="title" data-split>Memories you can <em>hold in your hand.</em></h2>
+      <p class="lead">
         Your portal comes with a premium Memory Key — a card that opens your family portal
         with a tap or scan. No passwords printed, ever.
       </p>
       <ul class="ks__list">
-        <li><Icon name="key" size={20} /><div><b>Memory Key card</b><span>QR / NFC card that opens your secure portal entry.</span></div></li>
-        <li><Icon name="keepsake" size={20} /><div><b>Personalised 3D keepsake</b><span>A soft, storybook-style couple or family figure with your names and date.</span></div></li>
-        <li><Icon name="photo" size={20} /><div><b>Printed albums, USB &amp; SSD</b><span>Physical copies to keep on the shelf and pass down.</span></div></li>
+        <li data-reveal><Icon name="key" size={22} /><div><b>Memory Key card</b><span>QR / NFC card that opens your secure portal entry.</span></div></li>
+        <li data-reveal><Icon name="keepsake" size={22} /><div><b>Personalised 3D keepsake</b><span>A soft, storybook-style couple or family figure with your names and date.</span></div></li>
+        <li data-reveal><Icon name="photo" size={22} /><div><b>Printed albums, USB &amp; SSD</b><span>Physical copies to keep on the shelf and pass down.</span></div></li>
       </ul>
-      <p class="ks__flow">Choose a memory → pick a keepsake → personalise → preview → order</p>
     </div>
   </div>
 </section>
 
 <style>
   .ks {
+    background: var(--mp-night-2);
+    overflow: hidden;
+  }
+  .ks__grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--mp-space-8);
+    gap: 5rem;
     align-items: center;
   }
-  .ks h2 {
-    font-size: var(--mp-text-3xl);
-    margin-top: var(--mp-space-3);
-  }
-  .ks__lead {
-    margin-top: var(--mp-space-4);
-    font-size: var(--mp-text-lg);
-    color: var(--mp-muted);
+  .ks__copy h2 {
+    margin: 1rem 0 1.5rem;
   }
   .ks__list {
     display: grid;
-    gap: var(--mp-space-4);
-    list-style: none;
-    margin: var(--mp-space-6) 0 0;
+    gap: 1.4rem;
+    margin: 2.5rem 0 0;
     padding: 0;
+    list-style: none;
   }
   .ks__list li {
     display: flex;
-    gap: var(--mp-space-3);
+    gap: 1rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--mp-night-line);
   }
   .ks__list :global(svg) {
-    color: var(--mp-gold);
+    color: var(--mp-gold-glow);
     flex: none;
-    margin-top: 3px;
+    margin-top: 2px;
   }
   .ks__list b {
     display: block;
+    font-weight: 500;
   }
   .ks__list span {
-    color: var(--mp-muted);
-    font-size: var(--mp-text-sm);
+    font-size: 0.92rem;
+    color: var(--mp-night-muted);
   }
-  .ks__flow {
-    margin-top: var(--mp-space-6);
-    padding: var(--mp-space-3) var(--mp-space-4);
-    border-radius: var(--mp-radius-md);
-    background: var(--mp-ivory);
-    font-size: var(--mp-text-sm);
-    color: var(--mp-charcoal-soft);
-  }
-  .ks__visual {
+  .ks__stage {
     position: relative;
-    min-height: 440px;
-    background: var(--mp-ivory);
-    border-radius: var(--mp-radius-xl);
-  }
-  .key-card {
-    position: absolute;
-    top: 50px;
-    left: 8%;
-    width: 250px;
-    aspect-ratio: 0.63;
-    padding: var(--mp-space-5);
-    border-radius: 18px;
-    background: linear-gradient(155deg, #2f2a25, #1f1b18);
-    color: var(--mp-ivory);
-    box-shadow: var(--mp-shadow-lg);
-    transform: rotate(-6deg);
-    display: flex;
-    flex-direction: column;
-  }
-  .key-card__chip {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    aspect-ratio: 1;
     display: grid;
     place-items: center;
-    background: var(--mp-gold);
-    color: var(--mp-warm-white);
+    perspective: 1400px;
   }
-  .key-card__family {
-    margin-top: var(--mp-space-5);
-    font-family: var(--mp-font-serif);
-    font-size: 1.35rem;
-  }
-  .key-card__since {
-    font-size: var(--mp-text-xs);
-    color: var(--mp-gold-soft);
-  }
-  .key-card__qr {
-    margin-top: auto;
-    width: 84px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 3px;
-    padding: 8px;
-    background: var(--mp-ivory);
-    border-radius: 6px;
-  }
-  .key-card__qr span {
-    aspect-ratio: 1;
-    background: var(--mp-beige);
-  }
-  .key-card__qr span.on {
-    background: var(--mp-charcoal);
-  }
-  .key-card__hint {
-    margin-top: var(--mp-space-2);
-    font-size: 0.72rem;
-    color: #bfb4a3;
-  }
-  .figure {
+  .ks__orbit {
     position: absolute;
-    right: 8%;
-    bottom: 50px;
-    width: 220px;
-    text-align: center;
+    inset: 6%;
+    border-radius: 50%;
+    border: 1px solid var(--mp-night-line);
+    background: radial-gradient(circle, rgba(212, 176, 122, 0.16), transparent 60%);
   }
-  .figure__pair {
-    position: relative;
-    height: 170px;
-  }
-  .figure__p {
-    position: absolute;
-    bottom: 0;
-    width: 70px;
-    border-radius: 40px 40px 14px 14px;
-  }
-  .figure__p::before {
+  .ks__orbit::before,
+  .ks__orbit::after {
     content: "";
     position: absolute;
-    left: 50%;
-    top: -52px;
-    width: 52px;
-    height: 52px;
-    transform: translateX(-50%);
     border-radius: 50%;
-    background: #f0d9bd;
-    box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.05);
+    border: 1px dashed rgba(212, 176, 122, 0.18);
   }
-  .figure__p--1 {
-    left: 46px;
-    height: 104px;
-    background: #4a443d;
-  }
-  .figure__p--2 {
-    right: 46px;
-    height: 96px;
-    background: #e8d9c2;
-  }
-  .figure__base {
-    position: absolute;
-    bottom: 34px;
-    left: 10px;
-    right: 10px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--mp-beige);
-  }
-  .figure p {
+  .ks__orbit::before { inset: 12%; }
+  .ks__orbit::after { inset: 26%; }
+  .key {
     position: relative;
-    margin-top: var(--mp-space-4);
+    width: min(56%, 300px);
+    aspect-ratio: 0.63;
+    transform-style: preserve-3d;
+  }
+  .key__face {
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    backface-visibility: hidden;
+    overflow: hidden;
+    box-shadow: 0 50px 80px -30px rgba(0, 0, 0, 0.9);
+  }
+  .key__front {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem;
+    background: linear-gradient(150deg, #3a3129 0%, #1a1613 60%, #2a231c 100%);
+    border: 1px solid rgba(212, 176, 122, 0.3);
+  }
+  .key__back {
+    transform: rotateY(180deg);
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 1rem;
+    background: linear-gradient(150deg, #d4b07a, #a8834f);
+    color: var(--mp-night);
     font-family: var(--mp-font-serif);
-    font-style: italic;
-    font-size: 0.95rem;
-    color: var(--mp-charcoal-soft);
+    font-size: 1.4rem;
   }
-
-  @media (max-width: 960px) {
-    .ks {
+  .key__back svg path,
+  .key__back svg circle {
+    stroke: var(--mp-night);
+  }
+  .key__back svg circle {
+    fill: var(--mp-night);
+  }
+  .key__chip {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--mp-gold-glow);
+    color: var(--mp-night);
+  }
+  .key__family {
+    margin-top: 1.6rem;
+    font-family: var(--mp-font-serif);
+    font-size: 1.55rem;
+    line-height: 1.1;
+  }
+  .key__since {
+    font-size: 0.78rem;
+    color: var(--mp-gold-glow);
+    margin-top: 0.3rem;
+  }
+  .key__qr {
+    margin-top: auto;
+    width: 92px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    padding: 8px;
+    background: #f3ece0;
+    border-radius: 8px;
+  }
+  .key__qr span {
+    aspect-ratio: 1;
+  }
+  .key__qr span.on {
+    background: #1a1613;
+  }
+  .key__hint {
+    margin-top: 0.6rem;
+    font-size: 0.72rem;
+    color: var(--mp-night-muted);
+  }
+  .key__shine {
+    position: absolute;
+    inset: -50%;
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 240, 210, 0.22) 50%, transparent 60%);
+    transform: translateX(-60%);
+    pointer-events: none;
+  }
+  @media (max-width: 900px) {
+    .ks__grid {
       grid-template-columns: 1fr;
+      gap: 3rem;
     }
-    .ks__visual {
-      order: 2;
-    }
-  }
-  @media (max-width: 520px) {
-    .key-card {
-      width: 190px;
-      left: 4%;
-    }
-    .figure {
-      right: 0;
-      transform: scale(0.85);
-      transform-origin: bottom right;
+    .ks__stage {
+      max-width: 460px;
+      width: 100%;
+      margin-inline: auto;
     }
   }
 </style>
