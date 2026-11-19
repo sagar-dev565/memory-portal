@@ -1,0 +1,14 @@
+{
+  "name": "memory-portal",
+  "private": true,
+  "description": "Memory Portal — a digital family heirloom. Monorepo organised by product level.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:website": "npm run dev --workspace=@memory-portal/website",
+    "build:website": "npm run build --workspace=@memory-portal/website",
+    "preview:website": "npm run preview --workspace=@memory-portal/website"
+  }
+}

@@ -1,0 +1,72 @@
+/*
+ * Memory Portal — shared design tokens
+ * Used by the public website (Astro) and the dashboards (Next.js).
+ * Direction: luxury family album + modern digital product.
+ * Warm ivory, warm white, charcoal, subtle beige and gold.
+ */
+:root {
+  /* Colour — surfaces */
+  --mp-ivory: #f7f1e6;
+  --mp-ivory-deep: #efe6d6;
+  --mp-warm-white: #fdfbf7;
+  --mp-beige: #e6d9c3;
+  --mp-beige-soft: #f1e9db;
+
+  /* Colour — ink */
+  --mp-charcoal: #2a2622;
+  --mp-charcoal-soft: #4a443d;
+  --mp-muted: #6f665b;
+  --mp-line: #e2d7c5;
+
+  /* Colour — accent */
+  --mp-gold: #a8834f;
+  --mp-gold-deep: #8a6a3c;
+  --mp-gold-soft: #e9dcc4;
+
+  /* Colour — status (dashboards) */
+  --mp-success: #4f7a5a;
+  --mp-warning: #b07d2b;
+  --mp-danger: #a4473b;
+  --mp-info: #4d6a85;
+
+  /* Typography */
+  --mp-font-serif: "Fraunces", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --mp-font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --mp-text-xs: 0.8125rem;
+  --mp-text-sm: 0.9375rem;
+  --mp-text-base: 1.0625rem;
+  --mp-text-lg: 1.25rem;
+  --mp-text-xl: 1.5rem;
+  --mp-text-2xl: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  --mp-text-3xl: clamp(2.25rem, 1.6rem + 2.8vw, 3.75rem);
+  --mp-text-display: clamp(2.6rem, 1.7rem + 4vw, 4.75rem);
+
+  /* Spacing (4px base) */
+  --mp-space-1: 0.25rem;
+  --mp-space-2: 0.5rem;
+  --mp-space-3: 0.75rem;
+  --mp-space-4: 1rem;
+  --mp-space-5: 1.5rem;
+  --mp-space-6: 2rem;
+  --mp-space-7: 3rem;
+  --mp-space-8: 4rem;
+  --mp-space-9: 6rem;
+  --mp-space-10: 8rem;
+
+  /* Radius */
+  --mp-radius-sm: 6px;
+  --mp-radius-md: 12px;
+  --mp-radius-lg: 20px;
+  --mp-radius-xl: 28px;
+  --mp-radius-pill: 999px;
+
+  /* Elevation — soft, warm shadows (no heavy glass) */
+  --mp-shadow-sm: 0 1px 2px rgba(42, 38, 34, 0.06), 0 1px 1px rgba(42, 38, 34, 0.04);
+  --mp-shadow-md: 0 8px 24px -10px rgba(42, 38, 34, 0.18), 0 2px 6px rgba(42, 38, 34, 0.05);
+  --mp-shadow-lg: 0 30px 60px -28px rgba(42, 38, 34, 0.32), 0 10px 20px -12px rgba(42, 38, 34, 0.12);
+
+  /* Layout */
+  --mp-container: 1200px;
+  --mp-touch-target: 44px;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@memory-portal/website",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Level 0 — Memory Portal public website (Astro).",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@memory-portal/tokens": "*",
+    "astro": "^5.0.0"
+  }
+}
