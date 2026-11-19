@@ -1,166 +1,195 @@
 ---
 import Icon from "./Icon.astro";
-import { conversionServices, deliveryServices, type Service } from "../data/site";
+import { conversionServices, deliveryServices } from "../data/site";
 
-const groups: { id: string; step: string; title: string; text: string; items: Service[] }[] = [
-  {
-    id: "convert",
-    step: "What we preserve",
-    title: "Bring us any format",
-    text: "Old tapes, discs, prints, reels and cassettes — we digitize them by hand, at full quality.",
-    items: conversionServices,
-  },
-  {
-    id: "receive",
-    step: "What you receive",
-    title: "Your family story, beautifully kept",
-    text: "Not a folder of files. A private portal, a key to open it, and keepsakes to hold.",
-    items: deliveryServices,
-  },
+const all = [
+  ...conversionServices.map((s) => ({ ...s, group: "We preserve" })),
+  ...deliveryServices.map((s) => ({ ...s, group: "You receive" })),
 ];
 ---
 
-<section class="section section--ivory" id="services">
-  <div class="container">
-    <div class="section-head section-head--center">
-      <span class="eyebrow">Our services</span>
-      <h2>Everything your family needs to preserve its story</h2>
-      <p>Two simple parts: we convert your old media, then we give it back as something your family will treasure.</p>
+<section class="services" id="services" data-services>
+  <div class="services__pin" data-services-pin>
+    <div class="services__head container">
+      <div>
+        <p class="eyebrow">Our services</p>
+        <h2 class="title" data-split>Everything your family needs to <em>preserve its story.</em></h2>
+      </div>
+      <p class="lead">
+        Two simple parts: we convert your old media by hand, then give it back as something your
+        family will treasure. Scroll to explore.
+      </p>
     </div>
 
-    {groups.map((group, gi) => (
-      <div class="group" id={group.id}>
-        <div class="group__head">
-          <span class="group__step">{String(gi + 1).padStart(2, "0")}</span>
-          <div>
-            <p class="group__kicker">{group.step}</p>
-            <h3>{group.title}</h3>
-            <p class="group__text">{group.text}</p>
-          </div>
-        </div>
-
-        <div class:list={["cards", group.items.length === 3 && "cards--three"]}>
-          {group.items.map((s) => (
-            <article class="card">
-              <div class="card__top">
-                <span class="card__icon"><Icon name={s.icon} size={26} /></span>
-                {s.tag && <span class="card__tag">{s.tag}</span>}
-              </div>
-              <h4>{s.title}</h4>
-              <p class="card__summary">{s.summary}</p>
-              <ul>
-                {s.includes.map((i) => (
-                  <li><Icon name="check" size={16} />{i}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
+    <div class="services__viewport">
+      <div class="services__track" data-services-track>
+        {all.map((s, i) => (
+          <article class:list={["svc", s.group === "You receive" && "svc--receive"]} data-tilt data-hover>
+            <div class="svc__top">
+              <span class="svc__num">{String(i + 1).padStart(2, "0")}</span>
+              <span class="svc__group">{s.group}</span>
+            </div>
+            <span class="svc__icon"><Icon name={s.icon} size={34} /></span>
+            <h3>{s.title}</h3>
+            <p class="svc__summary">{s.summary}</p>
+            <ul>
+              {s.includes.map((x) => <li>{x}</li>)}
+            </ul>
+            {s.tag && <span class="svc__tag">{s.tag}</span>}
+          </article>
+        ))}
       </div>
-    ))}
+    </div>
+
+    <div class="services__progress container" aria-hidden="true">
+      <span class="services__bar"><i data-services-bar></i></span>
+    </div>
   </div>
 </section>
 
 <style>
-  .group + .group {
-    margin-top: var(--mp-space-8);
+  .services {
+    position: relative;
+    background: var(--mp-night-2);
   }
-  .group__head {
-    display: flex;
-    gap: var(--mp-space-5);
-    align-items: flex-start;
-    margin-bottom: var(--mp-space-6);
-    max-width: 720px;
-  }
-  .group__step {
-    font-family: var(--mp-font-serif);
-    font-size: 2.75rem;
-    line-height: 1;
-    color: var(--mp-gold);
-  }
-  .group__kicker {
-    font-size: var(--mp-text-xs);
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--mp-gold-deep);
-  }
-  .group h3 {
-    font-size: var(--mp-text-2xl);
-    margin-top: var(--mp-space-1);
-  }
-  .group__text {
-    margin-top: var(--mp-space-2);
-    color: var(--mp-muted);
-  }
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: var(--mp-space-4);
-  }
-  .cards--three {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
-  .card {
+  .services__pin {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: var(--mp-space-5);
-    background: var(--mp-warm-white);
-    border: 1px solid var(--mp-line);
-    border-radius: var(--mp-radius-lg);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    justify-content: center;
+    padding-block: 7rem 4rem;
+    overflow: hidden;
   }
-  .card:hover {
-    box-shadow: var(--mp-shadow-md);
-    transform: translateY(-2px);
-  }
-  .card__top {
+  .services__head {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
+    gap: 3rem;
+    flex-wrap: wrap;
   }
-  .card__icon {
+  .services__head h2 {
+    max-width: 14ch;
+    margin-top: 1rem;
+  }
+  .services__viewport {
+    margin-top: 3.5rem;
+  }
+  .services__track {
+    display: flex;
+    gap: 1.25rem;
+    width: max-content;
+    padding-inline: max(1.5rem, calc((100vw - 1320px) / 2));
+  }
+  .svc {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: clamp(280px, 26vw, 360px);
+    min-height: 440px;
+    padding: 1.8rem;
+    border-radius: 24px;
+    background: linear-gradient(170deg, var(--mp-night-3), #12100d);
+    border: 1px solid var(--mp-night-line);
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: border-color 0.4s;
+  }
+  .svc:hover {
+    border-color: rgba(212, 176, 122, 0.45);
+  }
+  .svc--receive {
+    background: linear-gradient(170deg, #2a2219, #16120e);
+  }
+  .svc__top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mp-night-muted);
+  }
+  .svc__num {
+    color: var(--mp-gold-glow);
+  }
+  .svc__icon {
     display: grid;
     place-items: center;
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    background: var(--mp-beige-soft);
-    color: var(--mp-gold-deep);
+    width: 68px;
+    height: 68px;
+    margin-top: 2.2rem;
+    border-radius: 20px;
+    background: rgba(212, 176, 122, 0.1);
+    color: var(--mp-gold-glow);
+    transform: translateZ(40px);
   }
-  .card__tag {
-    padding: 4px 10px;
-    border-radius: var(--mp-radius-pill);
-    background: var(--mp-charcoal);
-    color: var(--mp-ivory);
-    font-size: 0.72rem;
+  .svc h3 {
+    margin-top: 1.6rem;
+    font-size: 1.85rem;
+    transform: translateZ(30px);
+  }
+  .svc__summary {
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--mp-night-muted);
+  }
+  .svc ul {
+    margin: auto 0 0;
+    padding: 1.4rem 0 0;
+    list-style: none;
+    border-top: 1px solid var(--mp-night-line);
+    display: grid;
+    gap: 0.45rem;
+    font-size: 0.85rem;
+  }
+  .svc li::before {
+    content: "—";
+    margin-right: 0.6rem;
+    color: var(--mp-gold-glow);
+  }
+  .svc__tag {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    transform: translateY(1.7rem);
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: var(--mp-gold-glow);
+    color: var(--mp-night);
+    font-size: 0.7rem;
     font-weight: 600;
   }
-  .card h4 {
-    margin-top: var(--mp-space-4);
-    font-size: 1.3rem;
+  .services__progress {
+    margin-top: 2.5rem;
   }
-  .card__summary {
-    margin-top: var(--mp-space-2);
-    font-size: var(--mp-text-sm);
-    color: var(--mp-charcoal-soft);
+  .services__bar {
+    display: block;
+    height: 1px;
+    background: var(--mp-night-line);
   }
-  .card ul {
-    margin: auto 0 0;
-    padding: var(--mp-space-4) 0 0;
-    list-style: none;
-    display: grid;
-    gap: 6px;
-    font-size: var(--mp-text-xs);
-    color: var(--mp-charcoal-soft);
+  .services__bar i {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: var(--mp-gold-glow);
+    transform: scaleX(0);
+    transform-origin: left;
   }
-  .card li {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  }
-  .card li :global(svg) {
-    color: var(--mp-gold);
-    flex: none;
+
+  /* Mobile & reduced motion: native horizontal swipe instead of pinning */
+  @media (max-width: 900px) {
+    .services__viewport {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .svc {
+      scroll-snap-align: center;
+      width: 82vw;
+      min-height: 420px;
+    }
+    .services__progress {
+      display: none;
+    }
   }
 </style>

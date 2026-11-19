@@ -1,0 +1,64 @@
+---
+const items = ["VHS & Hi8", "Wedding DVDs", "Super 8 Film", "Photo Albums", "Audio Cassettes", "Slides & Negatives", "MiniDV"];
+---
+
+<section class="marquee" aria-label="Formats we preserve">
+  <div class="marquee__track" data-marquee>
+    {[0, 1].map(() => (
+      <div class="marquee__group" aria-hidden="true">
+        {items.map((t) => (
+          <span class="marquee__item">{t}<i>✦</i></span>
+        ))}
+      </div>
+    ))}
+  </div>
+  <p class="sr-only">{items.join(", ")}</p>
+</section>
+
+<style>
+  .marquee {
+    position: relative;
+    padding-block: 2.2rem;
+    border-block: 1px solid var(--mp-night-line);
+    overflow: hidden;
+    background: var(--mp-night);
+  }
+  .marquee__track {
+    display: flex;
+    width: max-content;
+  }
+  .marquee__group {
+    display: flex;
+    flex: none;
+  }
+  .marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.2rem;
+    padding-right: 2.2rem;
+    font-family: var(--mp-font-serif);
+    font-size: clamp(2rem, 1.2rem + 3vw, 4.2rem);
+    font-weight: 300;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(243, 236, 224, 0.45);
+  }
+  .marquee__item:nth-child(odd) {
+    color: var(--mp-night-text);
+    -webkit-text-stroke: 0;
+    font-style: italic;
+  }
+  .marquee__item i {
+    font-style: normal;
+    font-size: 0.4em;
+    color: var(--mp-gold-glow);
+    -webkit-text-stroke: 0;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+</style>
