@@ -1,0 +1,116 @@
+---
+const year = new Date().getFullYear();
+const columns = [
+  { title: "Services", links: ["VHS & Tapes", "DVDs & CDs", "Photos & Albums", "Film Reels", "Audio Cassettes"] },
+  { title: "Product", links: ["Family Portal", "Memory Key", "Keepsakes", "Pricing", "Examples"] },
+  { title: "Company", links: ["About", "For Studios", "FAQ", "Contact", "Privacy"] },
+];
+---
+
+<section class="cta" id="contact">
+  <div class="container cta__inner">
+    <h2>Our family story lives here.</h2>
+    <p>Start preserving today — before another year turns another tape to static.</p>
+    <div class="cta__buttons">
+      <a href="#pricing" class="btn btn--gold">Preserve My Memories</a>
+      <a href="mailto:hello@memoryportal.example" class="btn btn--light">Talk to Our Team</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <p class="footer__name">Memory Portal</p>
+      <p>Your memories deserve more than a box in the attic.</p>
+    </div>
+    {columns.map((c) => (
+      <nav aria-label={c.title}>
+        <p class="footer__title">{c.title}</p>
+        <ul>{c.links.map((l) => <li><a href="#">{l}</a></li>)}</ul>
+      </nav>
+    ))}
+  </div>
+  <div class="container footer__bottom">
+    <p>© {year} Memory Portal. All rights reserved.</p>
+    <p>Made with care for families everywhere.</p>
+  </div>
+</footer>
+
+<style>
+  .cta {
+    background: var(--mp-charcoal);
+    color: var(--mp-ivory);
+    padding-block: var(--mp-space-9);
+    text-align: center;
+  }
+  .cta h2 {
+    color: var(--mp-warm-white);
+    font-size: var(--mp-text-3xl);
+  }
+  .cta p {
+    margin-top: var(--mp-space-4);
+    color: #cfc5b6;
+    font-size: var(--mp-text-lg);
+  }
+  .cta__buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--mp-space-3);
+    margin-top: var(--mp-space-6);
+  }
+  .footer {
+    background: #1f1c19;
+    color: #bfb4a3;
+    padding-block: var(--mp-space-8) var(--mp-space-5);
+    font-size: var(--mp-text-sm);
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+    gap: var(--mp-space-6);
+  }
+  .footer__name {
+    font-family: var(--mp-font-serif);
+    font-size: 1.4rem;
+    color: var(--mp-ivory);
+    margin-bottom: var(--mp-space-2);
+  }
+  .footer__title {
+    color: var(--mp-ivory);
+    font-weight: 600;
+    margin-bottom: var(--mp-space-3);
+  }
+  .footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--mp-space-2);
+  }
+  .footer a {
+    text-decoration: none;
+  }
+  .footer a:hover {
+    color: var(--mp-gold-soft);
+  }
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--mp-space-3);
+    margin-top: var(--mp-space-7);
+    padding-top: var(--mp-space-5);
+    border-top: 1px solid rgba(247, 241, 230, 0.1);
+    font-size: var(--mp-text-xs);
+  }
+  @media (max-width: 760px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

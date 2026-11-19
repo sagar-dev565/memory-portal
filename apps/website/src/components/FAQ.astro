@@ -1,0 +1,70 @@
+---
+import { faqs } from "../data/site";
+---
+
+<section class="section" id="faq">
+  <div class="container faq">
+    <div class="section-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions families ask us</h2>
+      <p>Can't find your answer? <a href="#contact">Talk to our team</a> — we're happy to help.</p>
+    </div>
+    <div class="faq__list">
+      {faqs.map((f, i) => (
+        <details class="faq__item" open={i === 0}>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: var(--mp-space-8);
+  }
+  .faq .section-head a {
+    color: var(--mp-gold-deep);
+  }
+  .faq__item {
+    border-bottom: 1px solid var(--mp-line);
+  }
+  .faq__item summary {
+    position: relative;
+    list-style: none;
+    padding: var(--mp-space-5) var(--mp-space-7) var(--mp-space-5) 0;
+    font-family: var(--mp-font-serif);
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq__item summary::after {
+    content: "+";
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--mp-font-sans);
+    font-size: 1.5rem;
+    color: var(--mp-gold);
+  }
+  .faq__item[open] summary::after {
+    content: "–";
+  }
+  .faq__item p {
+    padding-bottom: var(--mp-space-5);
+    color: var(--mp-charcoal-soft);
+    max-width: 620px;
+  }
+  @media (max-width: 960px) {
+    .faq {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

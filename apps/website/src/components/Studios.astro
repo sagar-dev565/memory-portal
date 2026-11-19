@@ -1,0 +1,119 @@
+---
+import { studioBenefits } from "../data/site";
+---
+
+<section class="section section--ivory" id="studios">
+  <div class="container studios">
+    <div class="studios__copy">
+      <span class="eyebrow">For studios &amp; photographers</span>
+      <h2>Give every client a memory they can keep forever.</h2>
+      <p class="studios__lead">
+        Wedding photographers, videographers, event studios and digitization partners use Memory
+        Portal to deliver projects in a beautiful private portal — and earn on every delivery.
+      </p>
+      <div class="studios__ctas">
+        <a href="#studio-signup" class="btn btn--primary">Create Studio Account</a>
+        <a href="#studio-demo" class="btn btn--secondary">See Studio Demo</a>
+      </div>
+    </div>
+
+    <div class="studios__benefits">
+      {studioBenefits.map((b) => (
+        <div class="benefit">
+          <h3>{b.title}</h3>
+          <p>{b.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="flow" aria-label="Studio workflow">
+      {["Create client", "Upload photos & videos", "Preview as client", "Publish portal", "Deliver by WhatsApp, SMS or email"].map((s, i) => (
+        <div class="flow__step"><span>{i + 1}</span>{s}</div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .studios {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: var(--mp-space-7) var(--mp-space-8);
+    align-items: start;
+  }
+  .studios h2 {
+    font-size: var(--mp-text-3xl);
+    margin-top: var(--mp-space-3);
+  }
+  .studios__lead {
+    margin-top: var(--mp-space-4);
+    font-size: var(--mp-text-lg);
+    color: var(--mp-muted);
+  }
+  .studios__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--mp-space-3);
+    margin-top: var(--mp-space-6);
+  }
+  .studios__benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--mp-space-4);
+  }
+  .benefit {
+    padding: var(--mp-space-5);
+    background: var(--mp-warm-white);
+    border-radius: var(--mp-radius-lg);
+    border: 1px solid var(--mp-line);
+  }
+  .benefit h3 {
+    font-size: 1.2rem;
+  }
+  .benefit p {
+    margin-top: var(--mp-space-2);
+    font-size: var(--mp-text-sm);
+    color: var(--mp-muted);
+  }
+  .flow {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--mp-space-3);
+  }
+  .flow__step {
+    display: flex;
+    align-items: center;
+    gap: var(--mp-space-3);
+    padding: var(--mp-space-4);
+    background: var(--mp-charcoal);
+    color: var(--mp-ivory);
+    border-radius: var(--mp-radius-md);
+    font-size: var(--mp-text-sm);
+    font-weight: 500;
+  }
+  .flow__step span {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--mp-gold);
+    font-weight: 600;
+  }
+
+  @media (max-width: 960px) {
+    .studios {
+      grid-template-columns: 1fr;
+    }
+    .flow {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .studios__benefits {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import Icon from "./Icon.astro";
+import { trustPoints } from "../data/site";
+const icons = ["lock", "check", "shield", "users"] as const;
+---
+
+<section class="section" id="trust">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Trust &amp; privacy</span>
+      <h2>Irreplaceable memories deserve real care</h2>
+    </div>
+    <div class="trust">
+      {trustPoints.map((t, i) => (
+        <div class="trust__item">
+          <span class="trust__icon"><Icon name={icons[i]} size={24} /></span>
+          <h3>{t.title}</h3>
+          <p>{t.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--mp-space-5);
+  }
+  .trust__item {
+    text-align: center;
+    padding: var(--mp-space-5) var(--mp-space-4);
+  }
+  .trust__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--mp-beige-soft);
+    color: var(--mp-gold-deep);
+  }
+  .trust h3 {
+    margin-top: var(--mp-space-4);
+    font-size: 1.25rem;
+  }
+  .trust p {
+    margin-top: var(--mp-space-2);
+    font-size: var(--mp-text-sm);
+    color: var(--mp-muted);
+  }
+  @media (max-width: 960px) {
+    .trust {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 520px) {
+    .trust {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

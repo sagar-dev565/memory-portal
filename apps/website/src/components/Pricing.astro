@@ -1,0 +1,128 @@
+---
+import Icon from "./Icon.astro";
+import { plans } from "../data/site";
+---
+
+<section class="section section--ivory" id="pricing">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Pricing</span>
+      <h2>Simple plans for every family collection</h2>
+      <p>Every plan includes careful digitization, your originals returned, and a private family portal.</p>
+    </div>
+
+    <div class="plans">
+      {plans.map((p) => (
+        <article class:list={["plan", p.featured && "plan--featured"]}>
+          {p.featured && <span class="plan__badge">Most popular</span>}
+          <h3>{p.name}</h3>
+          <p class="plan__desc">{p.description}</p>
+          <p class="plan__price">{p.price}</p>
+          <p class="plan__cadence">{p.cadence}</p>
+          <ul>
+            {p.features.map((f) => <li><Icon name="check" size={18} />{f}</li>)}
+          </ul>
+          <a href="#contact" class:list={["btn", p.featured ? "btn--gold" : "btn--secondary"]}>{p.cta}</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mp-space-5);
+    align-items: stretch;
+  }
+  .plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--mp-space-6);
+    background: var(--mp-warm-white);
+    border: 1px solid var(--mp-line);
+    border-radius: var(--mp-radius-xl);
+  }
+  .plan--featured {
+    background: var(--mp-charcoal);
+    color: var(--mp-ivory);
+    border-color: var(--mp-charcoal);
+    box-shadow: var(--mp-shadow-lg);
+  }
+  .plan--featured h3 {
+    color: var(--mp-warm-white);
+  }
+  .plan__badge {
+    position: absolute;
+    top: -13px;
+    left: var(--mp-space-6);
+    padding: 5px 12px;
+    border-radius: var(--mp-radius-pill);
+    background: var(--mp-gold);
+    color: var(--mp-warm-white);
+    font-size: var(--mp-text-xs);
+    font-weight: 600;
+  }
+  .plan h3 {
+    font-size: 1.5rem;
+  }
+  .plan__desc {
+    margin-top: var(--mp-space-2);
+    font-size: var(--mp-text-sm);
+    color: var(--mp-muted);
+    min-height: 3em;
+  }
+  .plan--featured .plan__desc,
+  .plan--featured .plan__cadence {
+    color: #cfc5b6;
+  }
+  .plan__price {
+    margin-top: var(--mp-space-5);
+    font-family: var(--mp-font-serif);
+    font-size: 2.6rem;
+    line-height: 1;
+  }
+  .plan__cadence {
+    margin-top: var(--mp-space-2);
+    font-size: var(--mp-text-xs);
+    color: var(--mp-muted);
+  }
+  .plan ul {
+    display: grid;
+    gap: var(--mp-space-3);
+    list-style: none;
+    margin: var(--mp-space-5) 0 var(--mp-space-6);
+    padding: var(--mp-space-5) 0 0;
+    border-top: 1px solid var(--mp-line);
+    font-size: var(--mp-text-sm);
+  }
+  .plan--featured ul {
+    border-color: rgba(247, 241, 230, 0.15);
+  }
+  .plan li {
+    display: flex;
+    gap: var(--mp-space-2);
+    align-items: flex-start;
+  }
+  .plan li :global(svg) {
+    color: var(--mp-gold);
+    flex: none;
+    margin-top: 2px;
+  }
+  .plan .btn {
+    margin-top: auto;
+  }
+  .plan--featured .btn--secondary {
+    color: var(--mp-ivory);
+  }
+
+  @media (max-width: 960px) {
+    .plans {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+      margin-inline: auto;
+    }
+  }
+</style>

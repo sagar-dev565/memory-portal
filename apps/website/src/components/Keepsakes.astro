@@ -1,0 +1,230 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<section class="section" id="keepsakes">
+  <div class="container ks">
+    <div class="ks__visual" aria-hidden="true">
+      <div class="key-card">
+        <div class="key-card__chip"><Icon name="key" size={22} /></div>
+        <p class="key-card__family">The Sharma Family</p>
+        <p class="key-card__since">Our story since 1985</p>
+        <div class="key-card__qr">
+          {Array.from({ length: 25 }).map((_, i) => (
+            <span class:list={[(i * 7) % 3 === 0 && "on"]}></span>
+          ))}
+        </div>
+        <p class="key-card__hint">Tap or scan to open</p>
+      </div>
+      <div class="figure">
+        <div class="figure__base"></div>
+        <div class="figure__pair">
+          <span class="figure__p figure__p--1"></span>
+          <span class="figure__p figure__p--2"></span>
+        </div>
+        <p>“Anil &amp; Meera · 12.12.1998”</p>
+      </div>
+    </div>
+
+    <div class="ks__copy">
+      <span class="eyebrow">Memory Key &amp; Keepsakes</span>
+      <h2>Memories you can hold in your hand</h2>
+      <p class="ks__lead">
+        Your portal comes with a premium Memory Key — a card that opens your family portal
+        with a tap or scan. No passwords printed, ever.
+      </p>
+      <ul class="ks__list">
+        <li><Icon name="key" size={20} /><div><b>Memory Key card</b><span>QR / NFC card that opens your secure portal entry.</span></div></li>
+        <li><Icon name="keepsake" size={20} /><div><b>Personalised 3D keepsake</b><span>A soft, storybook-style couple or family figure with your names and date.</span></div></li>
+        <li><Icon name="photo" size={20} /><div><b>Printed albums, USB &amp; SSD</b><span>Physical copies to keep on the shelf and pass down.</span></div></li>
+      </ul>
+      <p class="ks__flow">Choose a memory → pick a keepsake → personalise → preview → order</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--mp-space-8);
+    align-items: center;
+  }
+  .ks h2 {
+    font-size: var(--mp-text-3xl);
+    margin-top: var(--mp-space-3);
+  }
+  .ks__lead {
+    margin-top: var(--mp-space-4);
+    font-size: var(--mp-text-lg);
+    color: var(--mp-muted);
+  }
+  .ks__list {
+    display: grid;
+    gap: var(--mp-space-4);
+    list-style: none;
+    margin: var(--mp-space-6) 0 0;
+    padding: 0;
+  }
+  .ks__list li {
+    display: flex;
+    gap: var(--mp-space-3);
+  }
+  .ks__list :global(svg) {
+    color: var(--mp-gold);
+    flex: none;
+    margin-top: 3px;
+  }
+  .ks__list b {
+    display: block;
+  }
+  .ks__list span {
+    color: var(--mp-muted);
+    font-size: var(--mp-text-sm);
+  }
+  .ks__flow {
+    margin-top: var(--mp-space-6);
+    padding: var(--mp-space-3) var(--mp-space-4);
+    border-radius: var(--mp-radius-md);
+    background: var(--mp-ivory);
+    font-size: var(--mp-text-sm);
+    color: var(--mp-charcoal-soft);
+  }
+  .ks__visual {
+    position: relative;
+    min-height: 440px;
+    background: var(--mp-ivory);
+    border-radius: var(--mp-radius-xl);
+  }
+  .key-card {
+    position: absolute;
+    top: 50px;
+    left: 8%;
+    width: 250px;
+    aspect-ratio: 0.63;
+    padding: var(--mp-space-5);
+    border-radius: 18px;
+    background: linear-gradient(155deg, #2f2a25, #1f1b18);
+    color: var(--mp-ivory);
+    box-shadow: var(--mp-shadow-lg);
+    transform: rotate(-6deg);
+    display: flex;
+    flex-direction: column;
+  }
+  .key-card__chip {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: var(--mp-gold);
+    color: var(--mp-warm-white);
+  }
+  .key-card__family {
+    margin-top: var(--mp-space-5);
+    font-family: var(--mp-font-serif);
+    font-size: 1.35rem;
+  }
+  .key-card__since {
+    font-size: var(--mp-text-xs);
+    color: var(--mp-gold-soft);
+  }
+  .key-card__qr {
+    margin-top: auto;
+    width: 84px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+    padding: 8px;
+    background: var(--mp-ivory);
+    border-radius: 6px;
+  }
+  .key-card__qr span {
+    aspect-ratio: 1;
+    background: var(--mp-beige);
+  }
+  .key-card__qr span.on {
+    background: var(--mp-charcoal);
+  }
+  .key-card__hint {
+    margin-top: var(--mp-space-2);
+    font-size: 0.72rem;
+    color: #bfb4a3;
+  }
+  .figure {
+    position: absolute;
+    right: 8%;
+    bottom: 50px;
+    width: 220px;
+    text-align: center;
+  }
+  .figure__pair {
+    position: relative;
+    height: 170px;
+  }
+  .figure__p {
+    position: absolute;
+    bottom: 0;
+    width: 70px;
+    border-radius: 40px 40px 14px 14px;
+  }
+  .figure__p::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -52px;
+    width: 52px;
+    height: 52px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: #f0d9bd;
+    box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.05);
+  }
+  .figure__p--1 {
+    left: 46px;
+    height: 104px;
+    background: #4a443d;
+  }
+  .figure__p--2 {
+    right: 46px;
+    height: 96px;
+    background: #e8d9c2;
+  }
+  .figure__base {
+    position: absolute;
+    bottom: 34px;
+    left: 10px;
+    right: 10px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--mp-beige);
+  }
+  .figure p {
+    position: relative;
+    margin-top: var(--mp-space-4);
+    font-family: var(--mp-font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--mp-charcoal-soft);
+  }
+
+  @media (max-width: 960px) {
+    .ks {
+      grid-template-columns: 1fr;
+    }
+    .ks__visual {
+      order: 2;
+    }
+  }
+  @media (max-width: 520px) {
+    .key-card {
+      width: 190px;
+      left: 4%;
+    }
+    .figure {
+      right: 0;
+      transform: scale(0.85);
+      transform-origin: bottom right;
+    }
+  }
+</style>
