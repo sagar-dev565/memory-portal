@@ -4,15 +4,15 @@ import { trustPoints } from "../data/site";
 const icons = ["lock", "check", "shield", "users"] as const;
 ---
 
-<section class="section" id="trust">
+<section class="section trust" id="trust">
   <div class="container">
-    <div class="section-head section-head--center">
-      <span class="eyebrow">Trust &amp; privacy</span>
-      <h2>Irreplaceable memories deserve real care</h2>
+    <div class="trust__head">
+      <p class="eyebrow">Trust &amp; privacy</p>
+      <h2 class="title" data-split>Irreplaceable memories deserve <em>real care.</em></h2>
     </div>
-    <div class="trust">
+    <div class="trust__grid">
       {trustPoints.map((t, i) => (
-        <div class="trust__item">
+        <div class="trust__item" data-reveal>
           <span class="trust__icon"><Icon name={icons[i]} size={24} /></span>
           <h3>{t.title}</h3>
           <p>{t.text}</p>
@@ -24,39 +24,49 @@ const icons = ["lock", "check", "shield", "users"] as const;
 
 <style>
   .trust {
+    background: var(--mp-night-2);
+  }
+  .trust__head h2 {
+    margin-top: 1rem;
+    max-width: 16ch;
+  }
+  .trust__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--mp-space-5);
+    gap: 1.2rem;
+    margin-top: 4rem;
   }
   .trust__item {
-    text-align: center;
-    padding: var(--mp-space-5) var(--mp-space-4);
+    padding: 2rem 1.6rem;
+    border-radius: 22px;
+    border: 1px solid var(--mp-night-line);
+    background: linear-gradient(170deg, var(--mp-night-3), transparent);
   }
   .trust__icon {
-    display: inline-grid;
+    display: grid;
     place-items: center;
-    width: 56px;
-    height: 56px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
-    background: var(--mp-beige-soft);
-    color: var(--mp-gold-deep);
+    border: 1px solid rgba(212, 176, 122, 0.35);
+    color: var(--mp-gold-glow);
   }
-  .trust h3 {
-    margin-top: var(--mp-space-4);
-    font-size: 1.25rem;
+  .trust__item h3 {
+    margin-top: 2rem;
+    font-size: 1.45rem;
   }
-  .trust p {
-    margin-top: var(--mp-space-2);
-    font-size: var(--mp-text-sm);
-    color: var(--mp-muted);
+  .trust__item p {
+    margin-top: 0.7rem;
+    font-size: 0.92rem;
+    color: var(--mp-night-muted);
   }
   @media (max-width: 960px) {
-    .trust {
-      grid-template-columns: repeat(2, 1fr);
+    .trust__grid {
+      grid-template-columns: 1fr 1fr;
     }
   }
-  @media (max-width: 520px) {
-    .trust {
+  @media (max-width: 560px) {
+    .trust__grid {
       grid-template-columns: 1fr;
     }
   }

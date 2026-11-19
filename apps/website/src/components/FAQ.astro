@@ -2,17 +2,17 @@
 import { faqs } from "../data/site";
 ---
 
-<section class="section" id="faq">
-  <div class="container faq">
-    <div class="section-head">
-      <span class="eyebrow">FAQ</span>
-      <h2>Questions families ask us</h2>
-      <p>Can't find your answer? <a href="#contact">Talk to our team</a> — we're happy to help.</p>
+<section class="section faq" id="faq">
+  <div class="container faq__grid">
+    <div class="faq__head">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="title" data-split>Questions families <em>ask us.</em></h2>
+      <p class="lead">Can't find your answer? <a href="#contact" data-hover>Talk to our team</a> — we're happy to help.</p>
     </div>
     <div class="faq__list">
       {faqs.map((f, i) => (
-        <details class="faq__item" open={i === 0}>
-          <summary>{f.q}</summary>
+        <details class="faq__item" open={i === 0} data-reveal>
+          <summary data-hover><span class="faq__num">{String(i + 1).padStart(2, "0")}</span>{f.q}<i aria-hidden="true"></i></summary>
           <p>{f.a}</p>
         </details>
       ))}
@@ -22,49 +22,74 @@ import { faqs } from "../data/site";
 
 <style>
   .faq {
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: var(--mp-space-8);
+    background: var(--mp-night-2);
   }
-  .faq .section-head a {
-    color: var(--mp-gold-deep);
+  .faq__grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 5rem;
+  }
+  .faq__head h2 {
+    margin: 1rem 0 1.5rem;
+  }
+  .faq__head a {
+    color: var(--mp-gold-glow);
   }
   .faq__item {
-    border-bottom: 1px solid var(--mp-line);
+    border-bottom: 1px solid var(--mp-night-line);
   }
   .faq__item summary {
     position: relative;
+    display: flex;
+    gap: 1.2rem;
+    align-items: baseline;
+    padding: 1.8rem 3rem 1.8rem 0;
     list-style: none;
-    padding: var(--mp-space-5) var(--mp-space-7) var(--mp-space-5) 0;
     font-family: var(--mp-font-serif);
-    font-size: 1.2rem;
+    font-size: clamp(1.2rem, 1rem + 0.6vw, 1.5rem);
     cursor: pointer;
   }
   .faq__item summary::-webkit-details-marker {
     display: none;
   }
-  .faq__item summary::after {
-    content: "+";
-    position: absolute;
-    right: 4px;
-    top: 50%;
-    transform: translateY(-50%);
+  .faq__num {
     font-family: var(--mp-font-sans);
-    font-size: 1.5rem;
-    color: var(--mp-gold);
+    font-size: 0.75rem;
+    color: var(--mp-gold-glow);
   }
-  .faq__item[open] summary::after {
-    content: "–";
+  .faq__item summary i {
+    position: absolute;
+    right: 0.4rem;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+  }
+  .faq__item summary i::before,
+  .faq__item summary i::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 16px;
+    height: 1px;
+    background: var(--mp-gold-glow);
+    transition: transform 0.5s var(--mp-ease-out);
+  }
+  .faq__item summary i::after {
+    transform: rotate(90deg);
+  }
+  .faq__item[open] summary i::after {
+    transform: rotate(0deg);
   }
   .faq__item p {
-    padding-bottom: var(--mp-space-5);
-    color: var(--mp-charcoal-soft);
-    max-width: 620px;
+    padding: 0 0 1.8rem 2.4rem;
+    color: var(--mp-night-muted);
+    max-width: 640px;
   }
   @media (max-width: 960px) {
-    .faq {
+    .faq__grid {
       grid-template-columns: 1fr;
-      gap: 0;
+      gap: 2rem;
     }
   }
 </style>
